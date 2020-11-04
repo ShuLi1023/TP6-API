@@ -25,4 +25,18 @@ app.get('/digitize', (req, res) => {
     res.status(200).set({ 'Content-Type': 'application/json' }).json(createdElements)
 })
 
+app.post('/remove/:stackId', (req, res) => {
+    const stackId = parseInt(req.params.stackId)
+
+    const removed = getClinic().removeStackFromEnvelope(stackId)
+    console.log(removed)
+    console.log(getClinic().envelopes)
+    if(removed){
+        res.status(204).end()
+    }else{
+        res.status(400).end()
+    }
+    
+})
+
 export default app

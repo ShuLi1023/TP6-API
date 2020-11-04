@@ -3,7 +3,7 @@ import app from '../app'
 
 import * as clinicDependency from '../weiClinic'
 
-const AGE = 47
+const AGE = "47"
 const GENDER = 'M'
 const NAME = 'Elias Ryker'
 
