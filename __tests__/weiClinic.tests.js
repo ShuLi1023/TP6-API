@@ -9,7 +9,7 @@ describe('WeiClinic', () => {
         }
 
         const actualResult = new getClinic
-        expect(expectedResult).toEqual(actualResult)
+        expect(actualResult).toEqual(expectedResult)
     })
 
     test('Create Function',() => {
@@ -35,7 +35,33 @@ describe('WeiClinic', () => {
             envelope: Envelope
         }
         const actualResult = getClinic().create("F","abc","11")
-        expect(expectedResult).toEqual(actualResult)
+        expect(actualResult).toEqual(expectedResult)
+    })
+
+    test('Remove function, If ID can be found',() => {
+
+        getClinic().envelopes = [ {id: 1, idStack: 1} ]
+        getClinic().stacks = [ {id: 1, idEnvelope: 1} ]
+
+        const removed = getClinic().removeStackFromEnvelope(1)
+        expect(null).toBe(getClinic().stacks[0].idEnvelope)
+        expect(null).toBe(getClinic().envelopes[0].idStack)
+        expect(1).toBe(getClinic().envelopes.length)
+        expect(1).toBe(getClinic().stacks.length)
+        expect(removed).toBeTruthy
+    })
+
+    test('Remove function, If ID can not be found',() => {
+
+        getClinic().envelopes = [ {id: 1, idStack: 1} ]
+        getClinic().stacks = [ {id: 1, idEnvelope: 1} ]
+
+        const removed = getClinic().removeStackFromEnvelope(2)
+        expect(1).toBe(getClinic().stacks[0].idEnvelope)
+        expect(1).toBe(getClinic().envelopes[0].idStack)
+        expect(1).toBe(getClinic().envelopes.length)
+        expect(1).toBe(getClinic().stacks.length)
+        expect(removed).toBeFalsy
     })
 
 
