@@ -9,7 +9,7 @@ describe('WeiClinic', () => {
         }
 
         const actualResult = new getClinic
-        expect(expectedResult).toEqual(actualResult)
+        expect(actualResult).toEqual(expectedResult)
     })
 
     test('Create Function',() => {
@@ -35,7 +35,7 @@ describe('WeiClinic', () => {
             envelope: Envelope
         }
         const actualResult = getClinic().create("F","abc","11")
-        expect(expectedResult).toEqual(actualResult)
+        expect(actualResult).toEqual(expectedResult)
     })
 
 
@@ -49,7 +49,7 @@ describe('WeiClinic', () => {
 
         const actualResult = getClinic().killEnvelope(1)
 
-        expect(expectedResult).toBe(actualResult)
+        expect(actualResult).toBe(expectedResult)
         console.log("RESULT = " + getClinic().envelopes)
         expect(0).toBe(getClinic().envelopes.length)
         expect(null).toBe(getClinic().stacks[0].idEnvelope)
@@ -62,19 +62,32 @@ describe('WeiClinic', () => {
 
         const actualResult = getClinic().killEnvelope(1)
 
-        expect(expectedResult).toBe(actualResult)
+        expect(actualResult).toBe(expectedResult)
         expect(0).toBe(getClinic().envelopes.length)
     })
 
-        test('Attempt to Kill nonexisting Envelope', () => {
+    test('Attempt to Kill nonexisting Envelope', () => {
 
-            const expectedResult = false
-            getClinic().envelopes = []
+        const expectedResult = false
+        getClinic().envelopes = []
 
-            const actualResult = getClinic().killEnvelope(1)
+        const actualResult = getClinic().killEnvelope(1)
 
-            expect(expectedResult).toBe(actualResult)
+        expect(actualResult).toBe(expectedResult)
 
-        })
+    })
+
+    test('True death to stack implanted in envelope', () => {
+        const expectedResult = true
+
+        getClinic().envelopes = [ {id: 1, idStack: 2} ]
+        getClinic().stacks = [ {id: 2, idEnvelope: 1} ]
+
+        const actualResult = getClinic().killEnvelope(1)
+
+        expect(actualResult).toBe(expectedResult)
+        expect(0).toBe(getClinic().envelopes.length)
+        expect(0).toBe(getClinic().stacks.length)
+    })
 
 })
