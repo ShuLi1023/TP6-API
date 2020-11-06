@@ -44,8 +44,7 @@ app.put('/implant/:stackId/:envelopeId?', (req, res) => {
     const findStack = getClinic().stacks.find(stack => stack.id === stackId)
     if(findStack){
         const isStackAvaliable = findStack.idEnvelope === null
-        if(isStackAvaliable)
-        {
+        if(isStackAvaliable){
             if(!Number.isNaN(envelopeId)){
                 const findEnvelope = getClinic().envelopes.find(envelope => envelope.id === envelopeId)
                 if(!findEnvelope){
@@ -73,6 +72,18 @@ app.put('/implant/:stackId/:envelopeId?', (req, res) => {
     else{
         res.status(400).end()
     }  
+})
+
+app.post('/kill/:envelopeId', (req, res) => {
+    const envelopeId = parseInt(req.params.envelopeId)
+    const envelopeFound = getClinic().envelopes.find(envelope => envelope.id === envelopeId)
+
+    if(envelopeFound){
+        getClinic().killEnvelope()
+        res.status(204).end
+    }else{
+        res.status(400).end
+    }
 })
 
 export default app

@@ -47,6 +47,22 @@ class WeiClinic {
 
     killEnvelope(idEnvelope) {
 
+        for(let i=0; i < this.envelopes.length; i++){
+            if(this.envelopes[i].id === idEnvelope){
+                if(this.envelopes[i].idStack != null){
+                    const stackId = this.envelopes[i].idStack
+                    for(let j=0; j < this.stacks.length; j++){
+                        if(stacks[j].id == stackId){
+                            this.stacks[j].envelopeId = null
+                            break
+                        }
+                    }
+                }
+                this.envelopes.splice(i,1)
+                break;
+            }
+        }
+
     }
 
     destroyStack(idStack) {
