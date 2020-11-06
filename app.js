@@ -41,37 +41,22 @@ app.post('/remove/:stackId', (req, res) => {
 app.put('/implant/:stackId/:envelopeId?', (req, res) => {
     const stackId = parseInt(req.params.stackId)
     const envelopeId = parseInt(req.params.envelopeId)
-    const findStack = getClinic().stacks.find(stack => stack.id === stackId)
-    if(findStack){
-        const isStackAvaliable = findStack.idEnvelope === null
-        if(isStackAvaliable){
-            if(!Number.isNaN(envelopeId)){
-                const findEnvelope = getClinic().envelopes.find(envelope => envelope.id === envelopeId)
-                if(!findEnvelope){
-                    res.status(404).end()
-                }
-                getClinic().assignStackToEnvelope(stackId, envelopeId)
-                //console.log(getClinic().envelopes)
-                res.status(204).end()
-            }
-            else {
-                const availableEnvelope = getClinic().envelopes.find(envelope => envelope.idStack === null)
-                if (availableEnvelope) {
-                    getClinic().assignStackToEnvelope(stackId, availableEnvelope.id)
-                    //console.log(getClinic().envelopes)
-                    res.status(204).end()
-                } else {
-                    res.status(400).end()
-                }
-            }  
-        }
-        else{
+
+    const result = getClinic().removeStackFromEnvelope(stackId,envelopeId)
+
+    switch (result) {
+        case '1':
+            res.status(204).end()
+            break;
+        case '2':
             res.status(400).end()
-        } 
+            break;
+            
+        default:
+            res.status(404).end()
+            break;
     }
-    else{
-        res.status(400).end()
-    }  
+    
 })
 
 app.post('/kill/:envelopeId', (req, res) => {
