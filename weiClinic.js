@@ -91,7 +91,7 @@ class WeiClinic {
                         const stackId = this.envelopes[i].idStack
                         for(let j=0; j < this.stacks.length; j++){
                             if(this.stacks[j].id === stackId){
-                                this.stacks[j].envelopeId = null
+                                this.stacks[j].idEnvelope = null
                                 break
                             }
                         }
