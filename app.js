@@ -76,13 +76,13 @@ app.put('/implant/:stackId/:envelopeId?', (req, res) => {
 
 app.post('/kill/:envelopeId', (req, res) => {
     const envelopeId = parseInt(req.params.envelopeId)
-    const envelopeFound = getClinic().envelopes.find(envelope => envelope.id === envelopeId)
 
-    if(envelopeFound){
-        getClinic().killEnvelope(envelopeId)
-        res.status(204).end
+    const killed = getClinic().killEnvelope(envelopeId)
+
+    if(killed){   
+        res.status(204).end()
     }else{
-        res.status(400).end
+        res.status(400).end()
     }
 })
 
