@@ -42,7 +42,7 @@ app.put('/implant/:stackId/:envelopeId?', (req, res) => {
     const stackId = parseInt(req.params.stackId)
     const envelopeId = parseInt(req.params.envelopeId)
 
-    const result = getClinic().removeStackFromEnvelope(stackId,envelopeId)
+    const result = getClinic().assignStackToEnvelope(stackId,envelopeId)
 
     switch (result) {
         case '1':
