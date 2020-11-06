@@ -24,24 +24,32 @@ class WeiClinic {
     }
 
     assignStackToEnvelope(idStack, idEnvelope) {
-        console.log(idEnvelope)
-        const findStack = stacks.find(stack => stack.id === idStack)
+        const findStack = getClinic().stacks.find(stack => stack.id === idStack)
         if(findStack){
             const isStackAvaliable = findStack.idEnvelope === null
             if(isStackAvaliable){
                 if(!Number.isNaN(idEnvelope)){
-                    const findEnvelope = envelopes.find(envelope => envelope.id === idEnvelope)
+                    const findEnvelope = getClinic().envelopes.find(envelope => envelope.id === idEnvelope)
                     if(!findEnvelope){
                         return '3'
                     }
-                    this.envelopes.find(envelope => envelope.id === idEnvelope).idStack = idStack
-                    console.log(getClinic().envelopes)
-                    return '1'
+                    const isEnvelopeAvaliable = findEnvelope.idStack === null
+                    if(isEnvelopeAvaliable){
+                        this.envelopes.find(envelope => envelope.id === idEnvelope).idStack = idStack
+                        this.stacks.find(stack => stack.id === idStack).idEnvelope = idEnvelope
+                        console.log(getClinic().envelopes)
+                        return '1'
+                    }
+                    else{
+                        return '2'
+                    }
+                    
                 }
                 else {
-                    const availableEnvelope = envelopes.find(envelope => envelope.idStack === null)
+                    const availableEnvelope =getClinic().envelopes.find(envelope => envelope.idStack === null)
                     if (availableEnvelope) {
                         this.envelopes.find(envelope => envelope.id === availableEnvelope.id).idStack = idStack
+                        this.stacks.find(stack => stack.id === idStack).idEnvelope = availableEnvelope.id
                         console.log(getClinic().envelopes)
                         return '1'
                     } else {
@@ -57,6 +65,7 @@ class WeiClinic {
             return '2'
         }   
     }
+
 
     removeStackFromEnvelope(idStack) {
 
