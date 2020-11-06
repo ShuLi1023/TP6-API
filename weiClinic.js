@@ -74,10 +74,10 @@ class WeiClinic {
     destroyStack(idStack) {
 
         const findStack = getClinic().stacks.find(stack => stack.id === idStack)
+        
         if (findStack) {
             this.stacks = this.stacks.filter(filterStack => filterStack.id !== idStack)
-            const stackHasEnvelope = findStack.idEnvelope === null
-            if (!stackHasEnvelope) {
+            if (!findStack.idEnvelope === null) {
                 //RIP envelope
                 this.envelopes = this.envelopes.filter(filterEnvelope => filterEnvelope.id !== findStack.idEnvelope)
             }
