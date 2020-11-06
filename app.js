@@ -51,14 +51,14 @@ app.put('/implant/:stackId/:envelopeId?', (req, res) => {
                     res.status(404).end()
                 }
                 getClinic().assignStackToEnvelope(stackId, envelopeId)
-                console.log(getClinic().envelopes)
+                //console.log(getClinic().envelopes)
                 res.status(204).end()
             }
             else {
                 const availableEnvelope = getClinic().envelopes.find(envelope => envelope.idStack === null)
                 if (availableEnvelope) {
                     getClinic().assignStackToEnvelope(stackId, availableEnvelope.id)
-                    console.log(getClinic().envelopes)
+                    //console.log(getClinic().envelopes)
                     res.status(204).end()
                 } else {
                     res.status(400).end()
