@@ -86,4 +86,19 @@ app.post('/kill/:envelopeId', (req, res) => {
     }
 })
 
+app.delete('/truedeath/:stackId',(req, res) => {
+
+    const stackId = parseInt(req.params.stackId)
+    const result = getClinic().destroyStack(stackId)
+
+    if(result){
+        console.log(getClinic().envelopes)
+        console.log(getClinic().stacks)
+        res.status(204).end()
+    }
+    else{
+        res.status(400).end()
+    }
+})
+
 export default app
