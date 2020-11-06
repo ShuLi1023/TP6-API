@@ -79,7 +79,7 @@ app.post('/kill/:envelopeId', (req, res) => {
     const envelopeFound = getClinic().envelopes.find(envelope => envelope.id === envelopeId)
 
     if(envelopeFound){
-        getClinic().killEnvelope()
+        getClinic().killEnvelope(envelopeId)
         res.status(204).end
     }else{
         res.status(400).end
