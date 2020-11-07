@@ -14,14 +14,13 @@ app.use(function (_req, res, next) {
 })
 
 app.get('/digitize', (req, res) => {
-    // Retrieve gender, age and name
+
     const gender = req.query.gender
     const name = req.query.name
     const age = req.query.age
 
     const createdElements = getClinic().create(gender, name, age)
 
-    console.log(createdElements)
     res.status(200).set({ 'Content-Type': 'application/json' }).json(createdElements)
 })
 
@@ -39,6 +38,7 @@ app.post('/remove/:stackId', (req, res) => {
 })
 
 app.put('/implant/:stackId/:envelopeId?', (req, res) => {
+
     const stackId = parseInt(req.params.stackId)
     const envelopeId = parseInt(req.params.envelopeId)
 
@@ -77,8 +77,6 @@ app.delete('/truedeath/:stackId',(req, res) => {
     const result = getClinic().destroyStack(stackId)
 
     if(result){
-        console.log(getClinic().envelopes)
-        console.log(getClinic().stacks)
         res.status(204).end()
     }
     else{

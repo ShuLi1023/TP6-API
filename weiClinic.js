@@ -37,7 +37,6 @@ class WeiClinic {
                     if(isEnvelopeAvaliable){
                         this.envelopes.find(envelope => envelope.id === idEnvelope).idStack = idStack
                         this.stacks.find(stack => stack.id === idStack).idEnvelope = idEnvelope
-                        console.log(getClinic().envelopes)
                         return '1'
                     }
                     else{
@@ -50,7 +49,6 @@ class WeiClinic {
                     if (availableEnvelope) {
                         this.envelopes.find(envelope => envelope.id === availableEnvelope.id).idStack = idStack
                         this.stacks.find(stack => stack.id === idStack).idEnvelope = availableEnvelope.id
-                        console.log(getClinic().envelopes)
                         return '1'
                     } else {
                         return '2'
