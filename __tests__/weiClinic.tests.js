@@ -75,7 +75,83 @@ describe('WeiClinic', () => {
         expect(removed).toBeFalsy
     })
 
+    test('assignStackToEnvelope function, If idStack cannot be found and envelope id is not given',() => {
 
+        getClinic().envelopes = [ {id: 1, idStack: 1} ]
+        getClinic().stacks = [ {id: 1, idEnvelope: 1} ]
+
+        const implant = getClinic().assignStackToEnvelope(2,)
+        expect(getClinic().stacks[0].idEnvelope).toBe(1)
+        expect(getClinic().envelopes[0].idStack).toBe(1)
+        expect(getClinic().envelopes.length).toBe(1)
+        expect(getClinic().stacks.length).toBe(1)
+        expect(implant).toBe('2')
+    })
+
+    test('assignStackToEnvelope function, If idStack found but is not avaliable envelope id is not given',() => {
+
+        getClinic().envelopes = [ {id: 1, idStack: 1} ]
+        getClinic().stacks = [ {id: 1, idEnvelope: 1} ]
+
+        const implant = getClinic().assignStackToEnvelope(1,NaN)
+        expect(getClinic().stacks[0].idEnvelope).toBe(1)
+        expect(getClinic().envelopes[0].idStack).toBe(1)
+        expect(getClinic().envelopes.length).toBe(1)
+        expect(getClinic().stacks.length).toBe(1)
+        expect(implant).toBe('2')
+    })
+
+    test('assignStackToEnvelope function, If idStack found, avaliable but envelope id is not passed',() => {
+
+        getClinic().envelopes = [ {id: 1, name:'johndoe', idStack: null} ]
+        getClinic().stacks = [ {id: 1,name:'johndoe', idEnvelope: null} ]
+
+        const implant = getClinic().assignStackToEnvelope(1,NaN)
+        expect(getClinic().stacks[0].idEnvelope).toBe(1)
+        expect(getClinic().envelopes[0].idStack).toBe(1)
+        expect(getClinic().envelopes.length).toBe(1)
+        expect(getClinic().stacks.length).toBe(1)
+        expect(implant).toBe('1')
+    })
+
+    test('assignStackToEnvelope function, If idStack found, avaliable but envelope id is not found',() => {
+
+        getClinic().envelopes = [ {id: 1, name:'johndoe', idStack: null} ]
+        getClinic().stacks = [ {id: 1,name:'johndoe', idEnvelope: null} ]
+
+        const implant = getClinic().assignStackToEnvelope(1,2)
+        expect(getClinic().stacks[0].idEnvelope).toBe(null)
+        expect(getClinic().envelopes[0].idStack).toBe(null)
+        expect(getClinic().envelopes.length).toBe(1)
+        expect(getClinic().stacks.length).toBe(1)
+        expect(implant).toBe('3')
+    })
+
+    test('assignStackToEnvelope function, If idStack found, avaliable and  envelope id is found and not avaliable',() => {
+
+        getClinic().envelopes = [ {id: 1, name:'johndoe', idStack: 1} ]
+        getClinic().stacks = [ {id: 1,name:'johndoe', idEnvelope: null} ]
+
+        const implant = getClinic().assignStackToEnvelope(1,1)
+        expect(getClinic().stacks[0].idEnvelope).toBe(null)
+        expect(getClinic().envelopes[0].idStack).toBe(1)
+        expect(getClinic().envelopes.length).toBe(1)
+        expect(getClinic().stacks.length).toBe(1)
+        expect(implant).toBe('2')
+    })
+
+    test('assignStackToEnvelope function, If idStack found, avaliable and  envelope id is found, avaliable',() => {
+
+        getClinic().envelopes = [ {id: 1, name:'johndoe', idStack: null} ]
+        getClinic().stacks = [ {id: 1,name:'johndoe', idEnvelope: null} ]
+
+        const implant = getClinic().assignStackToEnvelope(1,1)
+        expect(getClinic().stacks[0].idEnvelope).toBe(1)
+        expect(getClinic().envelopes[0].idStack).toBe(1)
+        expect(getClinic().envelopes.length).toBe(1)
+        expect(getClinic().stacks.length).toBe(1)
+        expect(implant).toBe('1')
+    })
 
     test('Kill Envelope with stack', () => {
         const expectedResult = true
