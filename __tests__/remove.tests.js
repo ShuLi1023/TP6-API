@@ -28,7 +28,7 @@ describe('Remove action', () => {
             .end(done)
     })
 
-    test('When ID can not be found', (done) => {
+    test('When ID can not be found or it is not implanted', (done) => {
 
         const removeStackFromEnvelope = jest.fn().mockReturnValue(false)
 
