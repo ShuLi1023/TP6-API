@@ -125,7 +125,7 @@ class WeiClinic {
         
         if (findStack) {
             this.stacks = this.stacks.filter(filterStack => filterStack.id !== idStack)
-            if (!findStack.idEnvelope === null) {
+            if (findStack.idEnvelope !== null) {
                 this.envelopes = this.envelopes.filter(filterEnvelope => filterEnvelope.id !== findStack.idEnvelope)
             }
             return true

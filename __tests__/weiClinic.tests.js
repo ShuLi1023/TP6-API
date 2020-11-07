@@ -120,7 +120,7 @@ describe('WeiClinic', () => {
         getClinic().envelopes = [ {id: 1, idStack: 2} ]
         getClinic().stacks = [ {id: 2, idEnvelope: 1} ]
 
-        const actualResult = getClinic().killEnvelope(1)
+        const actualResult = getClinic().destroyStack(2)
 
         expect(actualResult).toBe(expectedResult)
         expect(0).toBe(getClinic().envelopes.length)
