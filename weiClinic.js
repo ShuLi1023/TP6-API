@@ -68,23 +68,27 @@ class WeiClinic {
 
 
     removeStackFromEnvelope(idStack) {
+        const stackFound = this.stacks.find(stack => stack.id === idStack)
 
-        for(let i=0; i < this.stacks.length; i++){
-            if(this.stacks[i].id === idStack ){
-                if(this.stacks[i].idEnvelope !== null) {
-                    for(let j=0; j < this.envelopes.length; j++){
-                        if(this.envelopes[j].id === this.stacks[i].idEnvelope){
-                            this.envelopes[j].idStack = null  
+        if(stackFound){
+            for(let i=0; i < this.stacks.length; i++){
+                if(this.stacks[i].id === idStack ){
+                    if(this.stacks[i].idEnvelope !== null) {
+                        for(let j=0; j < this.envelopes.length; j++){
+                            if(this.envelopes[j].id === this.stacks[i].idEnvelope){
+                                this.envelopes[j].idStack = null  
+                            }
                         }
+                    }else{
+                        return false
                     }
-                }else{
-                    return false
+                    this.stacks[i].idEnvelope = null
+                    return true
                 }
-                this.stacks[i].idEnvelope = null
-                return true
             }
+        }else{
+            return false
         }
-        return false
     }
 
 

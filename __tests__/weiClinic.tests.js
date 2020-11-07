@@ -38,7 +38,7 @@ describe('WeiClinic', () => {
         expect(actualResult).toEqual(expectedResult)
     })
 
-    test('Remove function, If ID can be found',() => {
+    test('Remove function, If ID can be found and implanted ',() => {
 
         getClinic().envelopes = [ {id: 1, idStack: 1} ]
         getClinic().stacks = [ {id: 1, idEnvelope: 1} ]
@@ -49,6 +49,17 @@ describe('WeiClinic', () => {
         expect(1).toBe(getClinic().envelopes.length)
         expect(1).toBe(getClinic().stacks.length)
         expect(removed).toBeTruthy
+    })
+
+    test('Remove function, If ID can be found but not implanted ',() => {
+
+        getClinic().envelopes = [ {id: 1, idStack: null} ]
+        getClinic().stacks = [ {id: 1, idEnvelope: null} ]
+
+        const removed = getClinic().removeStackFromEnvelope(1)
+        expect(1).toBe(getClinic().envelopes.length)
+        expect(1).toBe(getClinic().stacks.length)
+        expect(removed).toBeFalsy
     })
 
     test('Remove function, If ID can not be found',() => {
