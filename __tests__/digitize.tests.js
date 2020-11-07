@@ -14,6 +14,7 @@ beforeEach(() => {
 })
 
 describe('Digitize action', () => {
+    
     it('When data is fine', (done) => {
         const query = {
             gender: GENDER,

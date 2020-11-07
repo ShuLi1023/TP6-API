@@ -26,7 +26,7 @@ describe('Implant Feature', () => {
             .end(done)
     })
 
-    test('When Stack ID can be found but not avaliable and Envelope is not  given', (done) => {
+    test('When Stack ID found but not avaliable and Envelope is not  given', (done) => {
         const assignStackToEnvelope = jest.fn().mockReturnValue('2')
 
         clinicDependency.getClinic.mockReturnValue({
@@ -42,7 +42,7 @@ describe('Implant Feature', () => {
             .end(done)
     })
 
-    test('When Stack ID can be found,Avaliable and Envelope is not given but there are free envelopes', (done) => {
+    test('When Stack ID found,Avaliable and Envelope is not given but there are free envelopes', (done) => {
         const assignStackToEnvelope = jest.fn().mockReturnValue('1')
 
         clinicDependency.getClinic.mockReturnValue({
@@ -58,7 +58,7 @@ describe('Implant Feature', () => {
             .end(done)
     })
 
-    test('When Stack ID can be found and Envelope is cannot found', (done) => {
+    test('When Stack ID found and Envelope cannot be found', (done) => {
         const assignStackToEnvelope = jest.fn().mockReturnValue('3')
 
         clinicDependency.getClinic.mockReturnValue({
@@ -74,7 +74,7 @@ describe('Implant Feature', () => {
             .end(done)
     })
 
-    test('When Stack ID can be found and Envelope is can be found but not avaliable', (done) => {
+    test('When Stack ID found and Envelope found but not avaliable', (done) => {
         const assignStackToEnvelope = jest.fn().mockReturnValue('2')
 
         clinicDependency.getClinic.mockReturnValue({
@@ -90,7 +90,7 @@ describe('Implant Feature', () => {
             .end(done)
     })
 
-    test('When Stack ID can be found and Envelope is can be found, avaliable', (done) => {
+    test('When Stack ID found, Envelope is found and avaliable', (done) => {
         const assignStackToEnvelope = jest.fn().mockReturnValue('1')
 
         clinicDependency.getClinic.mockReturnValue({

@@ -10,7 +10,7 @@ beforeEach(() => {
 })
 
 describe('Kill Feature', () => {
-    test('When Envelope ID can be found', (done) => {
+    test('When Envelope Id can be found', (done) => {
 
         const killEnvelope = jest.fn().mockReturnValue(true)
 
@@ -28,7 +28,7 @@ describe('Kill Feature', () => {
             .end(done)
     })
 
-    test('When ID can not be found', (done) => {
+    test('When Envelope Id can not be found', (done) => {
 
         const killEnvelope = jest.fn().mockReturnValue(false)
 
